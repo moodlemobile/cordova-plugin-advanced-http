@@ -1,6 +1,6 @@
 {
-  "name": "cordova-plugin-advanced-http",
-  "version": "3.3.1",
+  "name": "@moodlehq/cordova-plugin-advanced-http",
+  "version": "3.3.1-moodle.1",
   "description": "Cordova / Phonegap plugin for communicating with HTTP servers using SSL pinning",
   "scripts": {
     "update:cert": "node ./scripts/update-e2e-server-cert.js && node ./scripts/update-e2e-client-cert.js",
@@ -16,7 +16,7 @@
     "release": "npm run test && ./scripts/release.sh"
   },
   "cordova": {
-    "id": "cordova-plugin-advanced-http",
+    "id": "@moodlehq/cordova-plugin-advanced-http",
     "platforms": [
       "ios",
       "android"
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/silkimen/cordova-plugin-advanced-http.git"
+    "url": "git+https://github.com/moodlemobile/cordova-plugin-advanced-http.git"
   },
   "keywords": [
     "cordova",
@@ -55,9 +55,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/silkimen/cordova-plugin-advanced-http/issues"
+    "url": "https://github.com/moodlemobile/cordova-plugin-advanced-http/issues"
   },
-  "homepage": "https://github.com/silkimen/cordova-plugin-advanced-http#readme",
+  "homepage": "https://github.com/moodlemobile/cordova-plugin-advanced-http#readme",
   "devDependencies": {
     "chai": "4.3.6",
     "colors": "1.4.0",
