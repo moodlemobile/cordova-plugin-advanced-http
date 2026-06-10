@@ -5,7 +5,6 @@
 #import "TextResponseSerializer.h"
 #import "TextRequestSerializer.h"
 #import "SM_AFHTTPSessionManager.h"
-#import "SDNetworkActivityIndicator.h"
 
 @interface CordovaHttpPlugin()
 
@@ -211,8 +210,6 @@
     [self setResponseSerializer:responseType forManager:manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
-    [[SDNetworkActivityIndicator sharedActivityIndicator] startActivity];
-
     @try {
         void (^onSuccess)(NSURLSessionTask *, id) = ^(NSURLSessionTask *task, id responseObject) {
             [weakSelf removeRequest:reqId];
@@ -228,7 +225,6 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
             [manager invalidateSessionCancelingTasks:YES];
         };
 
@@ -240,7 +236,6 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
             [manager invalidateSessionCancelingTasks:YES];
         };
 
@@ -248,7 +243,6 @@
         [self addRequest:reqId forTask:task];
     }
     @catch (NSException *exception) {
-        [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         [self handleException:exception withCommand:command];
     }
 }
@@ -274,8 +268,6 @@
     [self setResponseSerializer:responseType forManager:manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
-    [[SDNetworkActivityIndicator sharedActivityIndicator] startActivity];
-
     @try {
         void (^constructBody)(id<AFMultipartFormData>) = ^(id<AFMultipartFormData> formData) {
             NSArray *buffers = [data mutableArrayValueForKey:@"buffers"];
@@ -306,7 +298,6 @@
                 [dictionary setObject:@"Could not add part to multipart request body." forKey:@"error"];
                 CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
                 [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
                 return;
             }
         };
@@ -319,7 +310,6 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
             [manager invalidateSessionCancelingTasks:YES];
         };
 
@@ -331,7 +321,6 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
             [manager invalidateSessionCancelingTasks:YES];
         };
 
@@ -344,7 +333,6 @@
         [self addRequest:reqId forTask:task];
     }
     @catch (NSException *exception) {
-        [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         [self handleException:exception withCommand:command];
     }
 }
@@ -472,8 +460,6 @@
     [self setResponseSerializer:responseType forManager:manager];
 
     CordovaHttpPlugin* __weak weakSelf = self;
-    [[SDNetworkActivityIndicator sharedActivityIndicator] startActivity];
-
     @try {
         NSURLSessionDataTask *task = [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             NSError *error;
@@ -491,7 +477,6 @@
                 [dictionary setObject:@"Could not add file to post body." forKey:@"error"];
                 CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
                 [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
                 return;
             }
         } progress:nil success:^(NSURLSessionTask *task, id responseObject) {
@@ -502,7 +487,6 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         } failure:^(NSURLSessionTask *task, NSError *error) {
             [weakSelf removeRequest:reqId];
 
@@ -511,12 +495,10 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         }];
         [self addRequest:reqId forTask:task];
     }
     @catch (NSException *exception) {
-        [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         [self handleException:exception withCommand:command];
     }
 }
@@ -543,8 +525,6 @@
     }
 
     CordovaHttpPlugin* __weak weakSelf = self;
-    [[SDNetworkActivityIndicator sharedActivityIndicator] startActivity];
-
     @try {
         NSURLSessionDataTask *task = [manager GET:url parameters:nil progress: nil success:^(NSURLSessionTask *task, id responseObject) {
             [weakSelf removeRequest:reqId];
@@ -585,7 +565,6 @@
                 }
                 CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
                 [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
                 return;
             }
             NSData *data = (NSData *)responseObject;
@@ -595,7 +574,6 @@
                 [dictionary setObject:@"Could not write the data to the given filePath." forKey:@"error"];
                 CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
                 [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
                 return;
             }
 
@@ -606,7 +584,6 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         } failure:^(NSURLSessionTask *task, NSError *error) {
             [weakSelf removeRequest:reqId];
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
@@ -615,12 +592,10 @@
 
             CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dictionary];
             [weakSelf.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-            [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         }];
         [self addRequest:reqId forTask:task];
     }
     @catch (NSException *exception) {
-        [[SDNetworkActivityIndicator sharedActivityIndicator] stopActivity];
         [self handleException:exception withCommand:command];
     }
 }

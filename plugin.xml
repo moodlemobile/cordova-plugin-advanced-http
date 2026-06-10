@@ -43,7 +43,6 @@
     <header-file src="src/ios/SM_AFNetworking/SM_AFURLRequestSerialization.h"/>
     <header-file src="src/ios/SM_AFNetworking/SM_AFURLResponseSerialization.h"/>
     <header-file src="src/ios/SM_AFNetworking/SM_AFURLSessionManager.h"/>
-    <header-file src="src/ios/SDNetworkActivityIndicator/SDNetworkActivityIndicator.h"/>
     <source-file src="src/ios/CordovaHttpPlugin.m"/>
     <source-file src="src/ios/BinaryRequestSerializer.m"/>
     <source-file src="src/ios/BinaryResponseSerializer.m"/>
@@ -55,7 +54,6 @@
     <source-file src="src/ios/SM_AFNetworking/SM_AFURLRequestSerialization.m"/>
     <source-file src="src/ios/SM_AFNetworking/SM_AFURLResponseSerialization.m"/>
     <source-file src="src/ios/SM_AFNetworking/SM_AFURLSessionManager.m"/>
-    <source-file src="src/ios/SDNetworkActivityIndicator/SDNetworkActivityIndicator.m"/>
     <framework src="Security.framework"/>
     <framework src="SystemConfiguration.framework"/>
   </platform>
