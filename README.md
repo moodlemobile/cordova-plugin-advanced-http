@@ -9,13 +9,12 @@ We created this fork because we needed to include the following modifications in
 | PR | Description |
 | -- | ----------- |
 | [cordova-plugin-advanced-http#504](https://github.com/silkimen/cordova-plugin-advanced-http/pull/504) | Omit Accept-Charset header  |
-
-You can see all the changes here: [3.3.1...moodlemobile:v3.3.1-moodle.1](https://github.com/silkimen/cordova-plugin-advanced-http/compare/1f5b0f5b492a835c137bccca32ca12f6def00ee7...moodlemobile:v3.3.1-moodle.1)
+| -- | Remove unneeded SDNetworkActivityIndicator. It caused problems with cordova iOS 8. |
 
 ## Installation
 
 You can install this package using the [original installation instructions](https://github.com/silkimen/cordova-plugin-advanced-http#installation), but installing this package instead:
 
 ```sh
-cordova plugin add @moodlehq/cordova-plugin-advanced-http@3.3.1-moodle.1
+cordova plugin add @moodlehq/cordova-plugin-advanced-http@3.3.1-moodle.2
 ```
