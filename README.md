@@ -11,11 +11,12 @@ We created this fork because we needed to include the following modifications in
 | [cordova-plugin-advanced-http#504](https://github.com/silkimen/cordova-plugin-advanced-http/pull/504) | Omit Accept-Charset header  |
 | -- | Remove unneeded SDNetworkActivityIndicator. It caused problems with cordova iOS 8. |
 | -- | Properly list lodash as a dependency, and update some dependencies to fix vulnerabilities. |
+| [cordova-plugin-advanced-http#554](https://github.com/silkimen/cordova-plugin-advanced-http/pull/554) | stop importing the private <netinet6/in6.h> header (iOS)  |
 
 ## Installation
 
 You can install this package using the [original installation instructions](https://github.com/silkimen/cordova-plugin-advanced-http#installation), but installing this package instead:
 
 ```sh
-cordova plugin add @moodlehq/cordova-plugin-advanced-http@3.3.1-moodle.3
+cordova plugin add @moodlehq/cordova-plugin-advanced-http@3.3.1-moodle.4
 ```
